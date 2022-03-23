@@ -1,0 +1,23 @@
+name: initial-workflow
+on: [push]
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@v2
+      - run: docker build --tag img:latest
+  
+  code-quality-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pip install --upgrade pip
+      - run: pip install flake8 mypy
+      - run: flake8
+      - run: mypy
+
+  app-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pythion -m unittest
