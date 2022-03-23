@@ -1,2 +1,2 @@
 # background-mailer
-A containerized application used to send emails
+A python service used to send emails
