@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: pip install --upgrade pip
-      - run: pip install flake8 mypy
+      - run: pip install flake8 mypy djangorestframework-stubs django-stubs
       - run: flake8
       - run: mypy
 
