@@ -4,7 +4,7 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v2
+      - uses: actions/checkout@v2
       - run: docker build --tag img:latest
   
   code-quality-check:
@@ -20,4 +20,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: pythion -m unittest
+      - run: python -m unittest
