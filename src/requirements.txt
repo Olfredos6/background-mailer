@@ -1,0 +1,5 @@
+Django==4.0
+django-stubs
+djangorestframework==3.13.1
+djangorestframework-stubs
+gunicorn
