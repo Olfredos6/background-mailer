@@ -14,7 +14,7 @@ jobs:
       - run: pip install --upgrade pip
       - run: pip install flake8 mypy djangorestframework-stubs django-stubs
       - run: flake8 --exclude=settings.py .
-      - run: mypy .
+      - run: mypy --exclude '/settings\.py$' .
 
   unit-tests:
     runs-on: ubuntu-latest
