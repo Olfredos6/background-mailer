@@ -35,7 +35,6 @@ class CredentialManagerTests(TestCase):
             set(myCM.none_props)
         )
     
-
     def test_is_valid_returns_false_if_missing_value(self):
         request = Mock()
         request.data = {
