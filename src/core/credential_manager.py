@@ -1,6 +1,9 @@
 ''' Representation of a object used to manage
     access to a mail server used to send mails
 '''
+from email.message import EmailMessage
+from smtplib import SMTP, SMTP_SSL
+
 
 class CredentialManager:
     '''
@@ -19,6 +22,7 @@ class CredentialManager:
         self.port = None
         self.username = None
         self.password = None
+        self._email = EmailMessage()
     
     @property
     def none_props(self) -> list:
@@ -70,7 +74,37 @@ class CredentialManager:
         self.password = getenv('BKG_MAIL_USERNAME')
         self.username = getenv('BKG_MAIL_PASSWORD')
 
-        
+    def compose_email(
+        self,
+        subject: str,
+        recipients: list,
+        message: str,
+        is_html: bool = False
+    ) -> None:
+        '''Compose an email '''
+        self._email['Subject'] = subject
+        self._email['From'] = self.username
+        self._email['To'] = recipients
+        if is_html:
+            self._email.set_content(message, subtype='html')
+        else:
+            self._email.set_content(message)
+
+    def send_email(self):
+        '''
+            Send an email
+        '''
+        with SMTP_SSL(
+            host=self.host,
+            port=self.port
+        ) as s:
+            s.login(
+                self.username,
+                self.password
+            )
+            s.send_message(self._email)
+
+
 class MissingValueException(Exception):
     def __init__(self, CM: CredentialManager)-> None:
         self.__cm = CM
