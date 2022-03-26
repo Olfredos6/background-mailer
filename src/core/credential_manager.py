@@ -10,7 +10,7 @@ class CredentialManager:
         Credential Manager class for accessing a
         mail server.
     '''
-    environ_variables: list = [ 
+    environ_variables: list = [
         'BKG_MAIL_HOST',
         'BKG_MAIL_PORT',
         'BKG_MAIL_USERNAME',
@@ -23,17 +23,17 @@ class CredentialManager:
         self.username = None
         self.password = None
         self._email = EmailMessage()
-    
+
     @property
     def none_props(self) -> list:
         '''
             Returns a lis of None properties
         '''
         cm_dict = self.items()
-        none_props = [ 
-            prop for prop in cm_dict.keys() 
+        none_props = [
+            prop for prop in cm_dict.keys()
             if cm_dict[prop] is None
-            ]
+        ]
         return none_props
 
     def items(self) -> dict:
@@ -44,7 +44,7 @@ class CredentialManager:
             'username': self.username,
             'password': self.password
         }
-    
+
     def is_valid(self, raise_exception=False) -> bool:
         ''' is valid if all properties are not none '''
         if self.none_props:
@@ -62,7 +62,7 @@ class CredentialManager:
         self.port = request.data.get('port')
         self.password = request.data.get('password')
         self.username = request.data.get('username')
-    
+
     def get_credentials_from_env(self):
         '''
             Collects credentials from environment variables
@@ -106,8 +106,9 @@ class CredentialManager:
 
 
 class MissingValueException(Exception):
-    def __init__(self, CM: CredentialManager)-> None:
+    def __init__(self, CM: CredentialManager) -> None:
         self.__cm = CM
-    
+
     def __str__(self) -> str:
-        return f'CredentialManager is missing value(s) for {", ".join(self.__cm.none_props)}'
+        return f'CredentialManager is missing value(s) \
+        for {", ".join(self.__cm.none_props)}'

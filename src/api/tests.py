@@ -1,7 +1,5 @@
 
-from pickle import TRUE
 from rest_framework.test import APITestCase
-from rest_framework import status
 
 
 class EmailTests(APITestCase):
@@ -10,7 +8,8 @@ class EmailTests(APITestCase):
         self.valid_payload = {
             'subject': 'A Test',
             'recipient': ['me@nehemie.dev'],
-            'content': '<H6>Welcome</H6><br><p>We are testing new features</p>',
+            'content': '<H6>Welcome</H6><br><p>We are\
+            testing new features</p>',
             'html': True,
             'port': 456,
             'host': 'mail.test.com',
@@ -19,7 +18,6 @@ class EmailTests(APITestCase):
             'template': 'welcome'
             # templates folder, name of the template file
         }
-    
 
     def test_sends_email(self):
         '''
