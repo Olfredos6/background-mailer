@@ -2,7 +2,7 @@
     access to a mail server used to send mails
 '''
 from email.message import EmailMessage
-from smtplib import SMTP, SMTP_SSL
+from smtplib import SMTP_SSL
 
 
 class CredentialManager:
