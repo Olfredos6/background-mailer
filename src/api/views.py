@@ -21,6 +21,7 @@ class EmailerViewSet(ViewSet):
                 request.data.get('subject'),
                 request.data.get('recipient'),
                 request.data.get('message'),
+                request.data.get('html'),
             )
             cm.send_email()
         except Exception as e:
