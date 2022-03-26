@@ -6,7 +6,7 @@
 from unittest import TestCase
 from unittest.mock import Mock
 from core.credential_manager import CredentialManager, MissingValueException
-from requests import request
+from requests import request  # noqa: F401
 from os import environ
 
 
@@ -14,14 +14,15 @@ class CredentialManagerTests(TestCase):
     '''
         Tess suites for the Credentialmanager class
     '''
+
     def doCleanups(self) -> None:
         # removes any environment variables we created
         for prop in CredentialManager.environ_variables:
             try:
                 environ.pop(prop)
-            except KeyError as e:
-                pass # fail silent
-        
+            except KeyError as e:  # noqa: F841
+                pass  # fail silent
+
         return super().doCleanups()
 
     def test_none_props(self):
@@ -34,9 +35,9 @@ class CredentialManagerTests(TestCase):
             set(myCM.items().keys()),
             set(myCM.none_props)
         )
-    
+
     def test_is_valid_returns_false_if_missing_value(self):
-        request = Mock()
+        request = Mock()  # noqa: F811
         request.data = {
             'host': 'mail.test.com'
         }
@@ -44,9 +45,9 @@ class CredentialManagerTests(TestCase):
         cred_man = CredentialManager()
         cred_man.get_credentials_from_request(request)
         self.assertFalse(cred_man.is_valid())
-    
+
     def test_is_valid_raises_value_excetion_if_specified(self):
-        request = Mock()
+        request = Mock()  # noqa: F811
         request.data = {
             'host': 'mail.test.com'
         }
@@ -57,7 +58,7 @@ class CredentialManagerTests(TestCase):
             cred_man.is_valid(True)
 
     def test_is_valid_returns_true_if_all_is_present(self):
-        request = Mock()
+        request = Mock()  # noqa: F811
         request.data = {
             'host': 'mail.test.com',
             'port': 456,
@@ -85,6 +86,6 @@ class CredentialManagerTests(TestCase):
         self.assertEqual(
             set(myCM.items().values()),
             set(
-                [ environ[val] for val in CredentialManager.environ_variables]
+                [environ[val] for val in CredentialManager.environ_variables]
             )
         )

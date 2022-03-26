@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: pip install --upgrade pip
-      - run: pip install flake8 mypy djangorestframework-stubs django-stubs
+      - run: pip install flake8 mypy djangorestframework-stubs django-stubs types-requests
       - run: flake8 --exclude=settings.py .
       - run: mypy --exclude '/settings\.py$' .
 
@@ -20,4 +20,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd src && python manage.py test
+      - run: cd src && pip install -r requirements.txt && python manage.py test

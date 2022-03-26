@@ -1,74 +1,29 @@
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.exceptions import APIException
 from rest_framework import status
-from email.message import EmailMessage
-from smtplib import SMTP
-
-# construct email
-# def compose():
-#     email = EmailMessage()
-#     email['Subject'] = 'A Test'
-#     email['From'] = 'me@nehemie.dev'
-#     email['To'] = 'recipient@test.com'
-#     email.set_content('<font color="red">red color text</font>', subtype='html')
-
-#     # Send the message via local SMTP server.
-#     with SMTP(
-#         host='mail.privatemail.com',
-#         port=465
-#         ) as s:
-#         s.login('me@nehemie.dev', 'pass@Namecheap_#6')
-#         s.send_message(email)
-
-
-# def payload_is_valid():
-
-
-# @api_view(['POST'])
-# def mail_sender(request):
-#     '''
-#         Sends an email
-#     '''
-#     print(request.data)
-
-#     return Response({"message": 'Ok'}, status.HTTP_201_CREATED)
-
-
 from rest_framework.viewsets import ViewSet
+from core.credential_manager import CredentialManager
 
 
 class EmailerViewSet(ViewSet):
 
-    def compose(self, subject, sender, recipient, message, html=False):
-        email = EmailMessage()
-        email['Subject'] = subject
-        email['From'] = sender
-        email['To'] = recipient
-        if html:
-            email.set_content(message, subtype='html')
-        else:
-            email.set_content(message)
-        return email
-
-    def get_credentials():
-        pass
-
-    def send(self, email):
-        # Send the message via local SMTP server.
-        credentials = self.get_credentials()
-        with SMTP(
-            host=credentials.host,
-            port=credentials.port
-        ) as s:
-            s.login(
-                credentials.username,
-                credentials.password
-            )
-            s.send_message(email)
-
     def create(self, request):
-        print(request.data)
+        cm = CredentialManager()
+        # collects credentials from request,
+        # falls back to enviroments if not valid
+        cm.get_credentials_from_request(request)
+        if cm.is_valid() is not True:
+            cm.get_credentials_from_env()
+        cm.is_valid(raise_exception=True)
 
-        # get aut
-
-        return Response(status.HTTP_201_CREATED)
+        try:
+            cm.compose_email(
+                request.data.get('subject'),
+                request.data.get('recipient'),
+                request.data.get('message'),
+                request.data.get('html'),
+            )
+            cm.send_email()
+        except Exception as e:
+            raise APIException(e)
+        return Response(cm.items(), status.HTTP_201_CREATED)
