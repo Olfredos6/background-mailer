@@ -1,4 +1,5 @@
 
+from pickle import TRUE
 from rest_framework.test import APITestCase
 from rest_framework import status
 
@@ -11,6 +12,10 @@ class EmailTests(APITestCase):
             'recipient': ['me@nehemie.dev'],
             'content': '<H6>Welcome</H6><br><p>We are testing new features</p>',
             'html': True,
+            'port': 456,
+            'host': 'mail.test.com',
+            'username': 'test@test.com',
+            'password': 'somepassowrd',
             'template': 'welcome'
             # templates folder, name of the template file
         }
@@ -21,13 +26,7 @@ class EmailTests(APITestCase):
             Tests that we can send email
             provided a correct payload
         '''
-        res = self.client.post(
-            '',
-            data=self.valid_payload,
-            format='json'
-            )
-
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        pass
 
     def test_can_send_to_many_recipients(self):
         pass
