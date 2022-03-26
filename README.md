@@ -13,12 +13,12 @@ System Requirements:
  - Git
  - Docker
 
-You would start by cloning the repository to your sever. Then CD into the repo;s folder and start it wiht using *docker run* as follows:
+You would start by cloning the repository to your sever. Then CD into the repo's folder and start it using *docker run* as follows:
 `docker run [-d, --rm, -e] [--name some-name] -p IN[:OUT] -v /absolute/path/to/folder`
 
 ## How it works
 The system is a django project with 2 applications:
-- Core application: Used to compose and send emails
+- Core: Used to compose and send emails
 - API: used interface with the core application
 At the moment, the API only  responds to a POST request to the / route to post an email. 
 
@@ -47,5 +47,3 @@ The payload must include:
 
 #### Non-required parameters**
 The **html** property is used to indicate that the should be constructed as a multipart/alternative, a.k.a, an HTML message.
-
-
