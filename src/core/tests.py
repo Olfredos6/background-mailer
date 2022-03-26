@@ -37,7 +37,7 @@ class CredentialManagerTests(TestCase):
         )
 
     def test_is_valid_returns_false_if_missing_value(self):
-        request = Mock()  # noqua: F811
+        request = Mock()  # noqa: F811
         request.data = {
             'host': 'mail.test.com'
         }
@@ -47,7 +47,7 @@ class CredentialManagerTests(TestCase):
         self.assertFalse(cred_man.is_valid())
 
     def test_is_valid_raises_value_excetion_if_specified(self):
-        request = Mock()  # noqua: F811
+        request = Mock()  # noqa: F811
         request.data = {
             'host': 'mail.test.com'
         }
@@ -58,7 +58,7 @@ class CredentialManagerTests(TestCase):
             cred_man.is_valid(True)
 
     def test_is_valid_returns_true_if_all_is_present(self):
-        request = Mock()  # noqua: F811
+        request = Mock()  # noqa: F811
         request.data = {
             'host': 'mail.test.com',
             'port': 456,
