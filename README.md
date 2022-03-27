@@ -46,5 +46,5 @@ The payload must include:
 - recipient: scalar or list of recipient emails
 - message: message content
 
-#### Non-required parameters**
+#### Non-required parameters
 The **html** property is used to indicate that the should be constructed as a multipart/alternative, a.k.a, an HTML message.
