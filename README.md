@@ -13,9 +13,10 @@ System Requirements:
  - Git
  - Docker
 
-You would start by cloning the repository to your sever. Then CD into the repo's folder and start it using *docker run* as follows:
-`docker run [-d, --rm, -e] [--name some-name] -p IN[:OUT] -v /absolute/path/to/folder`
-
+You would start by cloning the repository to your sever. 
+- Then CD into the repo's folder and build the image first: `docker build [--tag some-tag(s)] .`
+- Then start it using *docker run* as follows: `docker run [-d, --rm, -e] [--name some-name] -p IN:3000 image_name:tag`
+*Note that internally the system listens on port 3000. You must speicfy the port mapping to it when writing the docker run command.*
 ## How it works
 The system is a django project with 2 applications:
 - Core: Used to compose and send emails
