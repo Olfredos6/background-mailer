@@ -13,7 +13,7 @@ def error(request, exception=None):
     '''
     return HttpResponse(
         f'''<p>Error: {exception}</p>
-        To learn about how to use this API, 
+        To learn about how to use this API,
         head to <a href='https://apis.nehemie.dev/bkg-emailer/welcome'>
         https://apis.nehemie.dev/bkg-emailer/welcome</a>
         '''
