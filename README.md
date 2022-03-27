@@ -6,7 +6,7 @@ A python service used to send emails
 
 
 ### Using the service for free
-There is an AWS instace of the service running on at nehemie.dev/api/mailer. Please note that service's availability is not guaranteed at the moment. 
+There is an AWS instace of the service running on at apis.nehemie.dev/bkg-emailer. Please note that service's availability is not guaranteed at the moment. 
 ### Deplyoying the service yourself
 System Requirements:
 
