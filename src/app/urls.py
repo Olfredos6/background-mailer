@@ -9,7 +9,7 @@ router.register(r'', EmailerViewSet, basename='email')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('/welcome', index )
+    path('/welcome', index)
 ]
 
 handler404 = index
