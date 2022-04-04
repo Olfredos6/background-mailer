@@ -3,7 +3,7 @@
     Author: Nehemie 'Alfred' Balukidi
     Source at https://github.com/Olfredos6/background-mailer
     Exmaple:
-        from athassanz.bkg_mailer import send_mail as send;
+        from bkg_mailer import send_mail as send;
         print(send("Hello!", ["recepient@email.com"], "Hello World!"))'
 '''
 
@@ -94,21 +94,23 @@ def build_email_body(body: str, page_title: str = "Yoursite.com") -> str:
         '''
 
 
-def send_mail(subject: str, recipient: list, body) -> None:
+def send_mail(subject: str, recipient: list, body) -> dict:
     '''
         Tries to send a request to send an email to
         BKG-Emailer and returns a dictionary containing
         status code, text, and json.
     '''
     email_body = build_email_body(body)
+    data = DEFAULT_MAIL_CONFIG
+    data.update({
+        'subject': subject,
+        'recipient': recipient,
+        'message': email_body
+    })
+    
     res = requests.post(
-        getenv('BKG_MAILER_URL'),
-        data={
-            **DEFAULT_MAIL_CONFIG,
-            'subject': subject,
-            'recipient': recipient,
-            'message': email_body
-        }
+        getenv('BKG_MAILER_URL', ''),
+        data=data
     )
 
     return {
