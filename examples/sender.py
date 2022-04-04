@@ -7,6 +7,7 @@
         print(send("Hello!", ["recepient@email.com"], "Hello World!"))'
 '''
 
+from typing import Any
 import requests
 from os import getenv
 
@@ -94,7 +95,7 @@ def build_email_body(body: str, page_title: str = "Yoursite.com") -> str:
         '''
 
 
-def send_mail(subject: str, recipient: list, body) -> dict:
+def send_mail(subject: str, recipient: Any, body) -> dict:
     '''
         Tries to send a request to send an email to
         BKG-Emailer and returns a dictionary containing
