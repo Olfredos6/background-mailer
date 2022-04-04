@@ -107,7 +107,7 @@ def send_mail(subject: str, recipient: list, body) -> dict:
         'recipient': recipient,
         'message': email_body
     })
-    
+
     res = requests.post(
         getenv('BKG_MAILER_URL', ''),
         data=data
