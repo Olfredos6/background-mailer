@@ -3,7 +3,7 @@
     Author: Nehemie 'Alfred' Balukidi
     Source at https://github.com/Olfredos6/background-mailer
     Exmaple:
-        from athassanz.bkg_mailer import send_mail as send; 
+        from athassanz.bkg_mailer import send_mail as send;
         print(send("Hello!", ["recepient@email.com"], "Hello World!"))'
 '''
 
