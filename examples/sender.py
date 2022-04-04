@@ -19,65 +19,80 @@ DEFAULT_MAIL_CONFIG = {
     'html': True
 }
 
+
 def build_email_body(body: str, page_title: str = "Yoursite.com") -> str:
     # Returns the HTML string to be sent
     return f'''
-                <!doctype html>
-                <html lang="en">
-                <head>
-                    <!-- Required meta tags -->
-                    <meta charset="utf-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!doctype html>
+        <html lang="en">
+        <head>
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta 
+            name="viewport" 
+            content="width=device-width, initial-scale=1">
 
-                    <!-- Bootstrap CSS -->
-                    <link 
-                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
-                    rel="stylesheet" 
-                    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
-                    crossorigin="anonymous">
+            <!-- Bootstrap CSS -->
+            <link 
+            href="https://cdn.jsdelivr.net/npm/
+            bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+            rel="stylesheet" 
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU
+            8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+            crossorigin="anonymous">
 
-                    <title>{page_title}</title>
-                    <style>
-                    .card {{
-                        top: 2rem;
-                        /* border-color: #991916; */
-                        border: 0px solid;
-                    }}
-                    .card-title {{
-                        background-color: #991916;
-                        padding: 2rem;
-                        color: #fff/*#991916*/;
-                    }}
-                    .card-body {{
-                        flex: 1 1 auto;
-                        padding: 1rem 1rem;
-                    }}
-                    .card-footer {{
-                        bottom: 0px;
-                        background-color: unset;
-                        color: #133e72;
-                        margin-bottom: 0px;
-                        border-top: 1px solid #133e72;
-                    }}
-                    </style>
-                </head>
-                <body>
-                    <div class="card mx-auto" style="width: 70%; margin: auto">
-                        <div class="card-title">
-                            <h5 >{page_title}</h5>
-                        </div>
-                        <div class="card-body">
-                            {body}
-                        </div>
-                        <div class="card-footer">
-                            <p>{page_title}<br>
-                            Copyright @ 2022</p>
-                        </div>
-                    </div>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-                </body>
-                </html>
-                '''
+            <title>{page_title}</title>
+            <style>
+            .card {{
+                top: 2rem;
+                /* border-color: #991916; */
+                border: 0px solid;
+            }}
+            .card-title {{
+                background-color: #991916;
+                padding: 2rem;
+                color: #fff/*#991916*/;
+            }}
+            .card-body {{
+                flex: 1 1 auto;
+                padding: 1rem 1rem;
+            }}
+            .card-footer {{
+                bottom: 0px;
+                background-color: unset;
+                color: #133e72;
+                margin-bottom: 0px;
+                border-top: 1px solid #133e72;
+            }}
+            </style>
+        </head>
+        <body>
+            <div 
+            class="card mx-auto" 
+            style="width: 70%; margin: auto"
+            >
+        <div class="card-title">
+            <h5 >{page_title}</h5>
+        </div>
+        <div class="card-body">
+                    {body}
+        </div>
+        <div class="card-footer">
+            <p>{page_title}<br>
+                    Copyright @ 2022</p>
+        </div>
+            </div>
+            <script 
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstra
+            p.bundle.min.js" 
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+
+            OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+            crossorigin="anonymous"
+            ></script>
+        </body>
+        </html>
+        '''
+
 
 def send_mail(subject: str, recipient: list, body) -> None:
     '''
